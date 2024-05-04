@@ -33,6 +33,6 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYmYiOjE3MTQ4NTI4NjIsImV4cCI6MTcxNDg1Mzc2MiwiaWF0IjoxNzE0ODUyODYyfQ.sffuyKWzRWdoRUtAsZwdIx0kluR-MjSmGYnG6wrejz4
 
 {
-  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYmYiOjE3MTQ4NTI4NjIsImV4cCI6MTcxNDg1Mzc2MiwiaWF0IjoxNzE0ODUyODYyfQ.sffuyKWzRWdoRUtAsZwdIx0kluR-MjSmGYnG6wrejz4",
+  "accessToken": "eyJhbGciOiJfdIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYmYiOjE3MTQ4NTI4NjIsImV4cCI6MTcxNDg1Mzc2MiwiaWF0IjoxNzE0ODUyODYyfQ.sffuyKWzRWdoRUtAsZwdIx0kluR-MjSmGYnG6wrejz4",
   "refreshToken": "zprxBvFjwVV5uErUeQ+jqwnC8vP1LPdPMnFyfv2EeQLGd9qjLnmU9WVI6D8VgSvRmRiSGmW/4s9yWBwMbccxdw=="
 }
