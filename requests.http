@@ -1,0 +1,28 @@
+﻿###
+POST http://localhost:5216/Users/register
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "username": "test",
+  "password": "password",
+  "confirmPassword": "password"
+}
+
+###
+POST http://localhost:5216/Users/login
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "password"
+}
+  
+###
+POST http://localhost:5216/Users/refresh-token
+Content-Type: application/json
+
+{
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYmYiOjE3MTQ4MzMxMTUsImV4cCI6MTcxNDgzNDAxNSwiaWF0IjoxNzE0ODMzMTE1fQ.9WRIauenVrzgy-7wm9Wg8bo8faRBga74v-CT6_2_pDY",
+  "refreshToken": "IVh+/xfJTvSVboVHtmMpxFpwvdnUm8y1XDqkuNBfrlc03xR+uJu5wUc2VRi4W4a7FI2/GJxqFgbMsAHFh8e11Q=="
+}
