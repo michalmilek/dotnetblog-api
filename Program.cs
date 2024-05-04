@@ -1,7 +1,10 @@
+using System.Text;
 using System.Text.Json.Serialization;
 using auth_playground.Authorization;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using auth_playground.Helpers;
 using auth_playground.Services;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -22,6 +25,21 @@ var builder = WebApplication.CreateBuilder(args);
     services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
     services.AddScoped<IJwtUtils, JwtUtils>();
     services.AddScoped<IUserService, UserService>();
+    services.AddHostedService<TokenCleanupService>();
+    
+    services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(builder.Configuration["AppSettings:Secret"])),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero
+            };
+        });
 }
 
 
@@ -36,6 +54,8 @@ app.UseCors(x => x
     .AllowAnyHeader()
     .AllowCredentials());
 app.UseMiddleware<ErrorHandlerMiddleware>();
+app.UseAuthentication(); // Ensure Authentication middleware is used
+app.UseAuthorization();
 app.MapControllers();
 }
 

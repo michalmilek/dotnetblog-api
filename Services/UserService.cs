@@ -2,6 +2,7 @@
 using auth_playground.Entities;
 using auth_playground.Helpers;
 using auth_playground.Models;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Options;
 using BCryptNET = BCrypt.Net.BCrypt;
 
@@ -13,6 +14,10 @@ public interface IUserService
     AuthenticateResponse Authenticate(AuthenticateRequest model, string ipAddress);
     RefreshTokenResponse RefreshToken(RefreshTokenRequest model);
     void InvalidateRefreshToken(string token);
+    
+    void RemoveAllRefreshTokens(int userId);
+    
+    void RemoveOldRefreshTokens(int userId);
     
     IEnumerable<User> GetAll();
 }
@@ -60,14 +65,7 @@ public class UserService : IUserService
         var jwtToken = _jwtUtils.GenerateJwtToken(user);
         Console.WriteLine(jwtToken);
         Console.WriteLine(ipAddress);
-        var refreshToken = new RefreshToken
-        {
-            Token = _jwtUtils.getRefreshToken(),
-            Expires = DateTime.UtcNow.AddDays(7),
-            Created = DateTime.UtcNow,
-            CreatedByIp = ipAddress
-        };
-        
+        var refreshToken = _jwtUtils.GenerateRefreshToken(ipAddress);
         Console.WriteLine(refreshToken);
         user.RefreshTokens.Add(refreshToken);
         
@@ -102,20 +100,25 @@ public class UserService : IUserService
 
         var refreshToken = user.RefreshTokens.Single(x => x.Token == token);
         refreshToken.Revoked = DateTime.UtcNow;
+        refreshToken.RevokedByIp = null;
+        refreshToken.ReplacedByToken = null;
+        refreshToken.ReasonRevoked = "Token revoked";
         
         _context.Users.Update(user);
         _context.SaveChanges();
     }
     
-    public void removeAllRefreshTokens(int userId)
+    public void RemoveAllRefreshTokens(int userId)
     {
         var user = _context.Users.Find(userId);
-        user.RefreshTokens.Clear();
+        user?.RefreshTokens.Clear();
+
+        if (user == null) return;
         _context.Users.Update(user);
         _context.SaveChanges();
     }
     
-    public void removeOldRefreshTokens(int userId)
+    public void RemoveOldRefreshTokens(int userId)
     {
         var user = _context.Users.Find(userId);
         user.RefreshTokens.RemoveAll(x => x.Expires <= DateTime.UtcNow);

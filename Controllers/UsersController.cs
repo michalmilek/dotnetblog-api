@@ -43,7 +43,7 @@ public class UsersController : ControllerBase
     }
     
     [HttpPost("revoke-token")]
-    public IActionResult RevokeToken(RefreshTokenResponse model)
+    public IActionResult RevokeToken(RefreshTokenRequest model)
     {
         _userService.InvalidateRefreshToken(model.RefreshToken);
         return Ok(new { message = "Token revoked" });
