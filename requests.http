@@ -23,16 +23,25 @@ POST http://localhost:5216/Users/refresh-token
 Content-Type: application/json
 
 {
-  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYmYiOjE3MTQ4NTE4NjIsImV4cCI6MTcxNDg1Mjc2MiwiaWF0IjoxNzE0ODUxODYyfQ.BcTnmIP665KvJ07057RkRk0zVkr3i3bt_yqNQDLWNx4",
-  "refreshToken": "zprxBvFjwVV5uErUeQ+jqwnC8vP1LPdPMnFyfv2EeQLGd9qjLnmU9WVI6D8VgSvRmRiSGmW/4s9yWBwMbccxdw=="
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYmYiOjE3MTQ5Mjg0OTUsImV4cCI6MTcxNDkyOTM5NSwiaWF0IjoxNzE0OTI4NDk1fQ.z_n2cMz61WvdE1MMnVsK7vvhR8SCkGkpOcNqHlEXLQw",
+  "refreshToken": "LFojOUz/TRam+4dTeuvalt9Xb26C8/V0jXnMnJssBXqrR5Um68UGcvjqWkZnlHcmt/hohtKxprxaUqBtoyNCJQ=="
 }
 
 ###
 POST http://localhost:5216/Users/revoke-token
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYmYiOjE3MTQ4NTI4NjIsImV4cCI6MTcxNDg1Mzc2MiwiaWF0IjoxNzE0ODUyODYyfQ.sffuyKWzRWdoRUtAsZwdIx0kluR-MjSmGYnG6wrejz4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYmYiOjE3MTQ5MDkyMjIsImV4cCI6MTcxNDkxMDEyMiwiaWF0IjoxNzE0OTA5MjIyfQ.uZrd2RhEqU-rmAsw_FTOL7nLnFfgK1pzpP99MNNIXkY
 
 {
-  "accessToken": "eyJhbGciOiJfdIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYmYiOjE3MTQ4NTI4NjIsImV4cCI6MTcxNDg1Mzc2MiwiaWF0IjoxNzE0ODUyODYyfQ.sffuyKWzRWdoRUtAsZwdIx0kluR-MjSmGYnG6wrejz4",
-  "refreshToken": "zprxBvFjwVV5uErUeQ+jqwnC8vP1LPdPMnFyfv2EeQLGd9qjLnmU9WVI6D8VgSvRmRiSGmW/4s9yWBwMbccxdw=="
+  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYmYiOjE3MTQ5Mjk4NjYsImV4cCI6MTcxNDkzMDc2NiwiaWF0IjoxNzE0OTI5ODY2fQ.szGkAt3LV2yhvNt6nGOG8ew6LE7oOONfMuV0XpHBCu4",
+  "refreshToken": "LFojOUz/TRam+4dTeuvalt9Xb26C8/V0jXnMnJssBXqrR5Um68UGcvjqWkZnlHcmt/hohtKxprxaUqBtoyNCJQ=="
+}
+###
+POST http://localhost:5216/Articles/add-article
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYmYiOjE3MTQ5Mjk4NjYsImV4cCI6MTcxNDkzMDc2NiwiaWF0IjoxNzE0OTI5ODY2fQ.szGkAt3LV2yhvNt6nGOG8ew6LE7oOONfMuV0XpHBCu4
+
+{
+  "title": "Test Article",
+  "content": "This is a test article"
 }

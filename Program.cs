@@ -4,14 +4,16 @@ using auth_playground.Authorization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using auth_playground.Helpers;
 using auth_playground.Services;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 {
     var services = builder.Services;
     var env = builder.Environment;
-
+    
     services.AddDbContext<DataContext>();
+    services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
     services.AddCors();
 
     services.AddControllers().AddJsonOptions(x =>
@@ -25,7 +27,9 @@ var builder = WebApplication.CreateBuilder(args);
     services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
     services.AddScoped<IJwtUtils, JwtUtils>();
     services.AddScoped<IUserService, UserService>();
+    services.AddScoped<IArticleService, ArticleService>();
     services.AddHostedService<TokenCleanupService>();
+    
     
     services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddJwtBearer(options =>

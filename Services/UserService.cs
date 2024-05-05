@@ -31,7 +31,8 @@ public class UserService : IUserService
     public UserService(
         DataContext context,
         IJwtUtils jwtUtils,
-        IOptions<AppSettings> appSettings)
+        IOptions<AppSettings> appSettings
+        )
     {
         _context = context;
         _jwtUtils = jwtUtils;
@@ -57,16 +58,12 @@ public class UserService : IUserService
     
     public AuthenticateResponse Authenticate(AuthenticateRequest model, string ipAddress)
     {
-        Console.WriteLine(model);
         var user = _context.Users.SingleOrDefault(user => user.Email == model.Email);
         if (user == null || !BCryptNET.Verify(model.Password, user.PasswordHash))
             throw new AppException("Username or password is incorrect");
 
         var jwtToken = _jwtUtils.GenerateJwtToken(user);
-        Console.WriteLine(jwtToken);
-        Console.WriteLine(ipAddress);
         var refreshToken = _jwtUtils.GenerateRefreshToken(ipAddress);
-        Console.WriteLine(refreshToken);
         user.RefreshTokens.Add(refreshToken);
         
         _context.Users.Update(user);

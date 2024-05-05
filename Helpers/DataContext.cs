@@ -6,6 +6,7 @@ namespace auth_playground.Helpers;
 public class DataContext: DbContext
 {
     public DbSet<User> Users { get; set; }
+    public DbSet<Article> Articles { get; set; }
     private readonly IConfiguration Configuration;
     public DataContext(IConfiguration configuration)
     {
